@@ -1,85 +1,99 @@
 import { axiosAdmin } from './api';
 
-// ================= TOURNAMENTS =================
-export const getTournaments = async () => {
-  return await axiosAdmin.get('/tournaments');
+// ================= MENU ITEMS =================
+export const getMenuItems = async (params = {}) => {
+  return await axiosAdmin.get('/menu', { params });
 };
-
-export const createTournament = async (data) => {
-  return await axiosAdmin.post('/tournaments', data, {
+export const createMenuItem = async (data) => {
+  return await axiosAdmin.post('/menu', data, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 };
-
-export const updateTournament = async (id, data) => {
-  return await axiosAdmin.put(`/tournaments/${id}`, data, {
+export const updateMenuItem = async (id, data) => {
+  return await axiosAdmin.put(`/menu/${id}`, data, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 };
-
-export const deleteTournament = async (id) => {
-  return await axiosAdmin.put(`/tournaments/${id}/deactivate`);
+export const deactivateMenuItem = async (id) => {
+  return await axiosAdmin.put(`/menu/${id}/deactivate`);
 };
 
-// ================= TEAMS =================
-export const getTeams = async (params = {}) => {
-  return await axiosAdmin.get('/teams', { params });
+// ================= EVENTS =================
+export const getEvents = async (params = {}) => {
+  return await axiosAdmin.get('/events', { params });
 };
-
-export const createTeam = async (data) => {
-  return await axiosAdmin.post('/teams', data, {
+export const createEvent = async (data) => {
+  return await axiosAdmin.post('/events', data, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 };
-
-export const updateTeam = async (id, data) => {
-  return await axiosAdmin.put(`/teams/${id}`, data, {
+export const updateEvent = async (id, data) => {
+  return await axiosAdmin.put(`/events/${id}`, data, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 };
-
-export const deleteTeam = async (id) => {
-  return await axiosAdmin.put(`/teams/${id}/deactivate`);
-};
-
-export const addTeamNamedMember = async (teamId, name) => {
-  return await axiosAdmin.post(`/teams/${teamId}/named-members`, { name });
-};
-
-export const removeTeamNamedMember = async (teamId, memberId) => {
-  return await axiosAdmin.delete(`/teams/${teamId}/named-members/${memberId}`);
-};
-
-// ================= FIELDS =================
-export const getFields = async () => {
-  return await axiosAdmin.get('/fields');
-};
-
-export const createField = async (data) => {
-  return await axiosAdmin.post('/fields', data, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  });
-};
-
-export const updateField = async (id, data) => {
-  return await axiosAdmin.put(`/fields/${id}`, data, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  });
-};
-
-export const deleteField = async (id) => {
-  return await axiosAdmin.put(`/fields/${id}/deactivate`);
+export const changeEventStatus = async (id) => {
+  return await axiosAdmin.put(`/events/${id}/status`);
 };
 
 // ================= RESERVATIONS =================
-export const getAllReservations = async (params = { page: 1, limit: 100 }) => {
+export const getReservations = async (params = {}) => {
   return await axiosAdmin.get('/reservations', { params });
 };
-
+export const createReservation = async (data) => {
+  return await axiosAdmin.post('/reservations', data);
+};
+export const updateReservation = async (id, data) => {
+  return await axiosAdmin.put(`/reservations/${id}`, data);
+};
+export const changeReservationStatus = async (id) => {
+  return await axiosAdmin.put(`/reservations/${id}/status`);
+};
 export const confirmReservation = async (id) => {
   return await axiosAdmin.put(`/reservations/${id}/confirm`);
 };
-
 export const cancelReservation = async (id) => {
   return await axiosAdmin.put(`/reservations/${id}/cancel`);
+};
+
+// ================= TABLES =================
+export const getTables = async (params = {}) => {
+  return await axiosAdmin.get('/tables', { params });
+};
+export const createTable = async (data) => {
+  return await axiosAdmin.post('/tables', data);
+};
+export const updateTable = async (id, data) => {
+  return await axiosAdmin.put(`/tables/${id}`, data);
+};
+export const deactivateTable = async (id) => {
+  return await axiosAdmin.put(`/tables/${id}/deactivate`);
+};
+
+// ================= ORDERS =================
+export const getOrders = async (params = {}) => {
+  return await axiosAdmin.get('/orders', { params });
+};
+export const createOrder = async (data) => {
+  return await axiosAdmin.post('/orders', data);
+};
+export const updateOrder = async (id, data) => {
+  return await axiosAdmin.put(`/orders/${id}`, data);
+};
+export const deactivateOrder = async (id) => {
+  return await axiosAdmin.put(`/orders/${id}/deactivate`);
+};
+
+// ================= MAINTENANCE =================
+export const getMaintenanceRecords = async (params = {}) => {
+  return await axiosAdmin.get('/maintenance', { params });
+};
+export const createMaintenanceRecord = async (data) => {
+  return await axiosAdmin.post('/maintenance', data);
+};
+export const updateMaintenanceRecord = async (id, data) => {
+  return await axiosAdmin.put(`/maintenance/${id}`, data);
+};
+export const deleteMaintenanceRecord = async (id) => {
+  return await axiosAdmin.delete(`/maintenance/${id}`);
 };

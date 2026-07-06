@@ -1,8 +1,4 @@
-const PLACEHOLDER_LOGOS = new Set([
-  'fields/kinal_sports_nyvxo5',
-  'kinal_sports_nyvxo5',
-  'kinal_sports/fields/kinal_sports_nyvxo5',
-]);
+const PLACEHOLDER_LOGOS = new Set(['papaluigi/default_logo', 'default_logo']);
 
 const isPlaceholderLogo = (value) => PLACEHOLDER_LOGOS.has(value?.trim());
 

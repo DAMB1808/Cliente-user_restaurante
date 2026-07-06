@@ -1,28 +1,15 @@
-import { useTournamentsStore } from '../../features/tournaments/store/tournamentStore.js';
-import { useTeamsStore } from '../../features/teams/store/teamStore.js';
-import { useFieldsStore } from '../../features/users/store/adminStore.js';
-import { useUserManagementStore } from '../../features/users/store/useUserManagementStore.js';
+import { useMenuStore } from '../../features/users/store/menuStore.js';
+import { useEventStore } from '../../features/users/store/eventStore.js';
+import { useReservationStore } from '../../features/users/store/reservationStore.js';
 
 export function resetAppStores() {
-  useTournamentsStore.setState({
-    tournaments: [],
-    loading: false,
-    error: null,
-  });
-  useTeamsStore.setState({
-    teams: [],
-    loading: false,
-    error: null,
-  });
-  useFieldsStore.setState({
-    fields: [],
-    reservations: [],
-    loading: false,
-    error: null,
-  });
-  useUserManagementStore.setState({
-    users: [],
-    loading: false,
-    error: null,
-  });
+  if (useMenuStore?.setState) {
+    useMenuStore.setState({ menuItems: [], loading: false, error: null });
+  }
+  if (useEventStore?.setState) {
+    useEventStore.setState({ events: [], loading: false, error: null });
+  }
+  if (useReservationStore?.setState) {
+    useReservationStore.setState({ reservations: [], loading: false, error: null });
+  }
 }

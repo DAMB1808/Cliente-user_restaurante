@@ -1,6 +1,6 @@
 # Client Admin - Panel Administrativo Web
 
-Frontend web para administradores de la plataforma KinalSports construido con React 19 y Vite.
+Frontend web para administradores del restaurante PapaLuigi construido con React 19 y Vite.
 
 ## Descripcion
 
@@ -9,7 +9,7 @@ Aplicacion web SPA (Single Page Application) que permite a administradores gesti
 Consume:
 
 - **auth-service** (.NET) para autenticacion, registro y gestion de usuarios/roles
-- **server-admin** para operaciones de negocio (campos, reservas, equipos, torneos)
+- **server-admin** para operaciones de negocio (menú, eventos, reservas)
 
 ## Tech Stack
 
@@ -52,7 +52,7 @@ cp .env.example .env
 
 ```env
 VITE_AUTH_URL=http://localhost:5156/api/v1
-VITE_ADMIN_URL=http://localhost:3009/kinalSportsAdmin/v1
+VITE_ADMIN_URL=http://localhost:3001/papaluigi/v1
 VITE_CLOUDINARY_BASE_URL=https://res.cloudinary.com/<tu-cloud-name>/image/upload/
 ```
 
@@ -73,10 +73,10 @@ client-admin/
 │   │   └── router/               # AppRoutes.jsx (router activo)
 │   ├── features/
 │   │   ├── auth/
-│   │   ├── fields/
-│   │   ├── reservations/
-│   │   ├── teams/
-│   │   ├── tournaments/
+│   │   ├── cart/
+│   │   ├── event/
+│   │   ├── menu/
+│   │   ├── reservation/
 │   │   └── users/
 │   ├── shared/
 │   │   ├── api/
@@ -120,13 +120,12 @@ Router activo: `src/app/router/AppRoutes.jsx`
 
 ### Rutas protegidas (`ADMIN_ROLE`)
 
-| Ruta                      | Componente   | Descripcion                  |
-| ------------------------- | ------------ | ---------------------------- |
-| `/dashboard/fields`       | Fields       | Gestion de campos deportivos |
-| `/dashboard/reservations` | Reservations | Reservas                     |
-| `/dashboard/teams`        | Teams        | Equipos                      |
-| `/dashboard/tournaments`  | Tournaments  | Torneos                      |
-| `/dashboard/users`        | Users        | Gestion de usuarios          |
+| Ruta                      | Componente   | Descripcion         |
+| ------------------------- | ------------ | ------------------- |
+| `/dashboard/menu`         | MenuItems    | Gestión del menú    |
+| `/dashboard/events`       | Events       | Gestión de eventos  |
+| `/dashboard/reservations` | Reservations | Reservas            |
+| `/dashboard/users`        | Users        | Gestión de usuarios |
 
 Protegidas por `ProtectedRoute` y `RoleGuard` (solo `ADMIN_ROLE`).
 
@@ -155,25 +154,25 @@ En `src/shared/api/`:
 
 ## Dependencias con Otros Servicios
 
-| Servicio     | Rol                                        |
-| ------------ | ------------------------------------------ |
-| auth-service | Autenticacion y gestion de usuarios/roles  |
-| server-admin | CRUD de campos, reservas, equipos, torneos |
+| Servicio     | Rol                                       |
+| ------------ | ----------------------------------------- |
+| auth-service | Autenticacion y gestion de usuarios/roles |
+| server-admin | CRUD de menú, eventos, reservas           |
 
 Ambos deben estar corriendo para funcionalidad completa.
 
 ## Docker
 
-Stack completo desde el repositorio [kinalsports-stack](https://github.com/<ORG>/kinalsports-stack) de tu organización:
+Stack completo desde el repositorio [papaluigi-stack](https://github.com/<ORG>/papaluigi-stack) de tu organización:
 
 ```bash
-cd kinalsports-stack
+cd papaluigi-stack
 cp .env.docker.example .env.docker
 ./scripts/bootstrap.sh          # o ./scripts/link-local.sh si los repos estan al mismo nivel
 docker compose --env-file .env.docker up --build
 ```
 
-En Docker las variables `VITE_*` se leen de `kinalsports-stack/.env.docker`. Para desarrollo local sin contenedores, usa `.env.example` de este repo.
+En Docker las variables `VITE_*` se leen de `papaluigi-stack/.env.docker`. Para desarrollo local sin contenedores, usa `.env.example` de este repo.
 
 ## Build y Deployment
 
